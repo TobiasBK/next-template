@@ -39,4 +39,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## Dev notes
 
-Problems with Storybook are common. Reference this thread: <https://github.com/storybookjs/storybook/issues/18319>
+If use Storybook, problems with are common. Reference this thread: <https://github.com/storybookjs/storybook/issues/18319>
