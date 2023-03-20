@@ -37,6 +37,92 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
-## Dev notes
+# Dev setup notes
 
-If use Storybook, problems with are common. Reference this thread: <https://github.com/storybookjs/storybook/issues/18319>
+### Engine locking
+
+- .nvmrc - which version of Node is used
+- .npmrc - which package manager is used
+
+### Code format
+
+- eslint - For best practices on coding standard
+
+- prettier - For auto formatting of code files
+
+To add prettier:
+
+`yarn add -D prettier`
+
+Then create two files in the root directory:
+
+- .prettierrc
+- .prettierignore
+
+Then add `"prettier": "prettier --write ."` script to `package.json`.
+
+Now run `yarn prettier`.
+
+### Git hooks
+
+Use Husky:
+
+`yarn add -D husky`
+
+`npx husky install`
+
+Then add this to package.json scripts:
+
+`"prepare": "husky install"`
+
+To create a hook, run:
+
+`npx husky add .husky/pre-commit "yarn lint"`
+
+This says for our commit to succeed, the yarn lint script must first run and work.
+
+Another hook:
+
+`npx husky add .husky/pre-push "yarn build"`
+
+### Add linter to commit messages
+
+`yarn add -D @commitlint/config-conventional @commitlint/cli`
+
+Then setup this:
+
+`commitlint.config.js`
+
+Then enable commitlint with Husky:
+
+`npx husky add .husky/commit-msg 'npx --no -- commitlint --edit "$1"`
+
+Sometimes that command doesn't work. Try other commands, like:
+`npx husky add .husky/commit-msg \"npx --no -- commitlint --edit '$1'\"`
+
+or
+
+`npx husky add .husky/commit-msg "npx --no -- commitlint --edit $1"`
+
+### VS code setup
+
+Create a `.vscode` directory in the root. Add a file to the directory called `settings.json`.
+
+List values you want to override defualt VS code settings. This allows these settings to only apply to this project.
+
+### Debugging
+
+Add a `launch.json` file to the `vscode` directory.
+Here setup debugging environment.
+
+### Environment variables
+
+To manage environment variables across different environmets, install cross-env.
+
+`yarn add -D cross-env`
+
+### Storybook
+
+Finally, storybook can be added depending on the type of project.
+
+Storybook setup problems with are common. Reference [this thread](https://github.com/storybookjs/storybook/issues/18319).
